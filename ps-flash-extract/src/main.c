@@ -114,13 +114,13 @@ const char *get_block_dev_by_part_id(int id, int platform) {
 		"unused"
 	};
 	static char *ps4_block_dev_list[] = { // Not totally known yet
-		"empty",
-		"idata",
-		"sam-ipl",
-		"sam-secureos",
+		"empty", // 0
+		"idata", // 1
+		"sam_ipl", // 2
+		"sam-secureos", // 3
 		"4",
 		"5",
-		"vtrm",
+		"vtrm", // 6
 		"7",
 		"8",
 		"9",
@@ -130,38 +130,38 @@ const char *get_block_dev_by_part_id(int id, int platform) {
 		"13",
 		"14",
 		"15",
-		"0",
-		"1",
-		"2",
-		"3",
-		"4",
-		"5",
-		"6",
-		"7",
-		"8",
-		"9",
-		"10",
-		"11",
-		"12",
-		"13",
-		"14",
-		"15",
-		"emc",
-		"eap",
-		"nvs",
-		"3",
-		"4",
-		"5",
-		"wifi-fw-ps4",
-		"bdhrl",
-		"ffs",
-		"wifi-fw",
-		"10",
-		"11",
-		"12",
-		"13",
-		"14",
-		"15",
+		"16",
+		"17",
+		"18",
+		"19",
+		"20",
+		"21",
+		"22",
+		"23",
+		"24",
+		"25",
+		"26",
+		"27",
+		"28",
+		"29",
+		"30",
+		"31",
+		"emc_ipl", // 32
+		"eap_kbl", // 33
+		"nvs", // 34
+		"35",
+		"36",
+		"37",
+		"torus2_fw", // 38
+		"bd_hrl", // 39
+		"unknown", // 40
+		"41",
+		"42",
+		"43",
+		"44",
+		"45",
+		"46",
+		"47",
 	};
 	if (platform == PLATFORM_PSP2)
 		return psp2_block_dev_list[id];
@@ -180,6 +180,10 @@ const char *get_fs_by_part_type(int type) {
 	return "unknown";
 }
 
+/*
+  Note that for PS4 sflash0 unpacking, names are either sflash0s0 or sflash0s1.
+  I guess that s0 is first sector and s1 is second sector but it seems that PS4 OS only mounts active one or maybe both.
+*/
 void unpack(char *filename, bool preserve_ram) {
 	char dirname[256-sizeof("_active")];
 	char outpath[256];
@@ -209,7 +213,7 @@ void unpack(char *filename, bool preserve_ram) {
 			printf("Partition idx %d, block_dev=%s, flag=%d, start_lba=0x%08x, n_sectors=0x%08x\n", part_idx, get_block_dev_by_part_id(p->id, platform), p->flag, p->start_lba, p->n_sectors);
 			if (memcmp(get_block_dev_by_part_id(p->id, platform), "empty", 5) != 0){
 				printf("Unpacking partition %s...\n", get_block_dev_by_part_id(p->id, platform));
-				snprintf(outpath, 256, "%s/%s%s", dirname, get_block_dev_by_part_id(p->id, platform), p->flag == 0 ? "" : "_active");
+				snprintf(outpath, 256, "%s/sflash0s0x%i_%s%s", dirname, p->id, get_block_dev_by_part_id(p->id, platform), p->flag == 0 ? "" : "_active");
 				FILE *out;
 				if ((out = fopen(outpath, "wb")) == NULL) {
 					perror("open");
@@ -247,7 +251,7 @@ void unpack(char *filename, bool preserve_ram) {
 			printf("Partition idx %d, block_dev=%s, flag=%d, start_lba=0x%08x, n_sectors=0x%08x\n", part_idx, get_block_dev_by_part_id(p->id, platform), p->flag, p->start_lba, p->n_sectors);
 			if (memcmp(get_block_dev_by_part_id(p->id, platform), "empty", 5) != 0){
 				printf("Unpacking partition %s...\n", get_block_dev_by_part_id(p->id, platform));
-				snprintf(outpath, 256, "%s/%s%s", dirname, get_block_dev_by_part_id(p->id, platform), p->flag == 0 ? "" : "_active");
+				snprintf(outpath, 256, "%s/sflash0s1x%i_%s%s", dirname, p->id, get_block_dev_by_part_id(p->id, platform), p->flag == 0 ? "" : "_active");
 				FILE *out;
 				if ((out = fopen(outpath, "wb")) == NULL) {
 					perror("open");
