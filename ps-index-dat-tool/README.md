@@ -1,6 +1,6 @@
 # ps-index-dat-tool
 
-A program to decrypt or encrypt PS3, PS Vita or PS4 index.dat file.
+A PC program that transforms a PS3, PS Vita or PS4 index.dat file into a version.txt file or reciprocally.
 
 ## Usage
 
