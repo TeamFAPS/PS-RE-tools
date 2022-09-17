@@ -21,6 +21,10 @@ ps-nids-extract (PSP, PS3, PSP2) - by @CelesteBlue-dev
 ---
 A PC program that extracts from a PS ELF a list in YAML format of exported NIDs. PSP and PS3 support will be added.
 
+ps-index-dat-tool (PS3, PSP2, PS4) - by @CelesteBlue-dev
+---
+A PC program that transforms a PS3, PS Vita or PS4 index.dat file into a version.txt file or reciprocally.
+
 --------------------------------------------------------------------------------
 
 ## Using the Tools
