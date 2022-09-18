@@ -1,5 +1,5 @@
 # PS Reverse Engineering Tools
-by FAPS Team (and other devs if they add their tools there)
+by FAPS Team (and other developers if they add their tools there)
 
 Every tool provided here will be licensed under GPLv3.0 unless stated otherwise.
 
