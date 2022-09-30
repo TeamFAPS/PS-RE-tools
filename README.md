@@ -15,7 +15,7 @@ These tools heavily contribute to Wiki and open source SDK improvements.
 
 ps-flash-extract (PSP2, PS4) - by @CelesteBlue-dev
 ---
-A PC program that extracts partitions from a PS Vita internal eMMC dump or a PS4 serial flash dump.
+A PC program that extracts partitions from a PS Vita internal eMMC dump or a PS Vita Memory Card dump or a PS Vita Gamecard dump or a PS4 serial flash dump.
 
 ps-nids-extract (PSP, PS3, PSP2) - by @CelesteBlue-dev
 ---
